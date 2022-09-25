@@ -1,0 +1,49 @@
+from django.db import models
+
+class Books(models.Model):
+    name=models.CharField(max_length=200)
+    author= models.CharField(max_length=200)
+    price= models.PositiveIntegerField()
+    publisher= models.CharField(max_length=200)
+    qty= models.PositiveIntegerField(default=1)
+
+
+orm query for creating the objects
+***********************************
+
+TO CREATE
+Modelname.objects.create(field1=values,field2=value,,,,,,)
+
+eg:
+Books.objects.create(name="aadujeevitham",author="Benyamin",price=320,publisher="abc",qty=10)
+Books.objects.create(name="randamoozham",author="mt",price=500,publisher="dc",qty=15)
+
+
+TO SELECT DETAILS
+Modelname.objects.all()
+eg: ################To select all or some details we need to assign it to a variable like qs
+qs=Books.objects.all()
+qs
+
+TO SELECT ONE DETAIL
+Modelname.objects.get(value)
+data=Books.objects.get(id=2)
+data
+
+
+TO FILTER
+Books.objects.filter(price__lt=500)
+Books.objects.filter(price__gt=500)
+
+TO EXCLUDE
+Books.objects.all().exclude(price=500)
+
+VALUES BETWEEN(field lookups)
+Books.objects.filter(qty__gte=20,qty__lte=50)
+
+
+TO UPDATE
+Books.objects.filter(id=2).update(price=200)
+
+TO DELETE
+Books.objects.filter(id=11).delete
